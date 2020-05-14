@@ -24,11 +24,11 @@ Sample Output 2:
 using namespace std;
 #define mod 1000000007
 int balancedBTs(int h) {
-    if(h==0)
+    if(h==0||h==1)
     return 1;
-   if(h==1)
-    return 3;
-   return (balancedBTs(h-1)*balancedBTs(h-2))%mod;
+   int h1=(balancedBTs(h-1));
+   int h2=balancedBTs(h-2);
+   return (2*(h1*h2)+(h1*h1))%mod;
 }
 int main() {
     int h;
