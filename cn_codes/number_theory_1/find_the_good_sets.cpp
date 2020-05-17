@@ -44,19 +44,34 @@ Test case 2. There are five sets which are good {6}, {2}, {3}, {6 2}, {6, 3}.
 using namespace std;
 #define pb push_back
 #define max 750001
-#define m 1000*1000*1000+7
+long long m=1000000007;
+typedef long long ll;
+ll arr[max];
 int main(){
-    int t;
-    cin>>t;
+    int t;  
+    cin>>t;            
     while(t--){
-        for(int i=2;i<=max;i++){
-            
+        int n;
+        cin>>n;
+        int des[n];
+        for(int i=0;i<n;i++)
+         cin>>des[i];
+        ll ans=0;
+        //sort(des,des+n);
+        for(int i=0;i<=max;i++)
+         arr[i]=0;
+        for(int i=0;i<n;i++)
+          arr[des[i]]=1; 
+        for(int i=1;i<=max;i++){
+            if(arr[i]>=1)
+            for(int j=i*2;j<=max;j+=i){
+                if(arr[j]>=1)
+                    arr[j]=(arr[i]+arr[j])%m;             
+            }            
         }
+        for(int i=0;i<n;i++){
+            ans=(arr[des[i]]+ans)%m;
+        }
+        cout<<ans<<endl;
     }
 }
-
-//2 3 6 8 9 16 10 5
-/*
-2 4 6 8 10 16
-3 6 9   
-*/

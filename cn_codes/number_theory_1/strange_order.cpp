@@ -1,6 +1,5 @@
 /*
 Strange order
-Send Feedback
 Given an integer n . Initially you have permutation p of size n : p[i] = i . To build 
 new array a from p following steps are done while permutation p is not empty:
 Choose maximum existing element in p and define it as x ; Choose all such y in p that
@@ -22,3 +21,12 @@ Add 4 and 2
 Add 3
 Add 1
 */
+
+#include<bits/stdc++.h>
+using namespace std;
+#define max 2000000
+#define forn(i,s,n) for(int i=s,i<n;i++)
+typedef long long ll;
+int main(){
+    
+}
