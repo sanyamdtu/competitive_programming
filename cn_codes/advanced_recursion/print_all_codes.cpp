@@ -20,16 +20,36 @@ kw
 
 #include<bits/stdc++.h>
 using namespace std;
-
-void printAllPossibleCodes(string input) {
-    
+void printAllPossibleCodes(string s,int num,int i,string ans) {
+    if(i>s.length()){
+        cout<<ans<<endl;
+        return ;
+    }
+    if(num>27)
+     return ;
+    char ch='a'+num-1;
+   // cout<<ch<<num;
+    ans.push_back(ch);
+    int n=s[i]-'0';
+    printAllPossibleCodes(s,n,i+1,ans);
+    if(i+1<s.length()){
+        n*=10;
+        n+=(s[i+1]-'0');
+        printAllPossibleCodes(s,n,i+2,ans);
+    }
 }
 
 
 int main(){
     string input;
     cin >> input;
-
-    printAllPossibleCodes(input);
+    printAllPossibleCodes(input,(input[0]-'0'),1,"\0");
+    //cout<<"ok";
+    if(input.length()>=2)
+    {
+        int n=10*(input[0]-'0')+(input[1]-'0');
+        printAllPossibleCodes(input,n,2,"\0");
+    }
+    
     return 0;
 }
