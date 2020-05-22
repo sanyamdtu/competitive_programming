@@ -35,6 +35,20 @@ Sample Output 3:
 */
 #include<bits/stdc++.h>
 using namespace std;
+int recursion(int *arr,int size,int idx,int num,int flag){
+    if(idx==-1)
+     return 0;
+    int included=0;
+    if(arr[idx]<num &&flag==0)
+     included_asc=recursion(arr,size,idx-1,arr[idx],flag)+1;//ascending included
+    else if(arr[idx]>num &&flag==1)
+     included_desc=recursion(arr,)
+}
 int main(){
-
+    int n;
+    cin>>n;
+    int arr[n+1];
+    for(int i=1;i<=n;i++)
+     cin>>arr[i];
+    
 }
