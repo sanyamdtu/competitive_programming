@@ -52,53 +52,60 @@ Sample Output
 
 #include<bits/stdc++.h>
 using namespace std;
-void iterativedp(int r,int c,int arr[][10]){
-    int dp[r][c];
-        memset(dp,0,sizeof(dp));
-        dp[r-1][c-1]=arr[r-1][c-1];
-        for(int i=r-1;i>=1;i--)
-         dp[i-1][c-1]+=arr[i-1][c-1]+dp[i][c-1];
-        for(int i=c-1;i>=1;i--)
-         dp[r-1][i-1]+=arr[r-1][i-1]+dp[r-1][i];
-        for(int i=r-1;i>=1;i--)
-         dp[i-1][0]+=arr[i-1][0]+dp[i][0];
-        for(int i=c-1;i>=1;i--)
-         dp[0][i-1]+=arr[0][i-1]+dp[0][i];
+// void iterativedp(int r,int c,int arr[][10]){
+//     int dp[r][c];
+//         memset(dp,0,sizeof(dp));
+//         dp[r-1][c-1]=arr[r-1][c-1];
+//         for(int i=r-1;i>=1;i--)
+//          dp[i-1][c-1]+=arr[i-1][c-1]+dp[i][c-1];
+//         for(int i=c-1;i>=1;i--)
+//          dp[r-1][i-1]+=arr[r-1][i-1]+dp[r-1][i];
+//         for(int i=r-1;i>=1;i--)
+//          dp[i-1][0]+=arr[i-1][0]+dp[i][0];
+//         for(int i=c-1;i>=1;i--)
+//          dp[0][i-1]+=arr[0][i-1]+dp[0][i];
         
-        for(int i=r-2;i>=0;i--){
-            for(int j=c-2;j>=0;j--){
-                dp[i][j]=max(dp[i+1][j],dp[i][j+1]);
-                if(arr[i][j]<0)
-                 arr[i][j]--;                 
-                dp[i][j]+=arr[i][j];
-            }
-        }
-        for(int i=0;i<r;i++){
-             for(int j=0;j<c;j++)
-              cout<<dp[i][j]<<" ";
-            cout<<endl;
-        }
-        if(dp[0][0]>=0){
-            cout<<1<<endl;
-        }
-        else
-        {
-            cout<<"opp";
-            cout<<abs(dp[0][0])<<endl;
-        }
+//         for(int i=r-2;i>=0;i--){
+//             for(int j=c-2;j>=0;j--){
+//                 dp[i][j]=max(dp[i+1][j],dp[i][j+1]);
+//                 if(arr[i][j]<0)
+//                  arr[i][j]--;                 
+//                 dp[i][j]+=arr[i][j];
+//             }
+//         }
+//         for(int i=0;i<r;i++){
+//              for(int j=0;j<c;j++)
+//               cout<<dp[i][j]<<" ";
+//             cout<<endl;
+//         }
+//         if(dp[0][0]>=0){
+//             cout<<1<<endl;
+//         }
+//         else
+//         {
+//             cout<<"opp";
+//             cout<<abs(dp[0][0])<<endl;
+//         }
         
-}
-int recursive_dp(int r,int c,int arr[][500],int i,int j){
-    if(i==0&&j==0){
+// }
+int recursive_dp(int r,int c,int arr[][500],int i,int j,int dp[][500]){
+    if(i==r-1&&j==c-1){
         return 1;
     }
-    if(i<0||j<0)
-     return INT_MIN;
-    int l=recursive_dp(r,c,arr,i,j-1);
-    int u=recursive_dp(r,c,arr,i-1,j);
-    int a=max(l,u);
-    if(arr[i][j]<0)
-     a+=arr[i][j];
+    if(i>r-1||j>c-1)
+     return INT_MAX;
+     if(dp[i][j]>0)
+     return dp[i][j];
+
+    int l=recursive_dp(r,c,arr,i,j+1,dp);
+    int u=recursive_dp(r,c,arr,i+1,j,dp);
+    int a=min(l,u);
+    a-=arr[i][j];
+       if(a<=0){
+        dp[i][j]=1;
+        return 1;
+    }
+    dp[i][j]=abs(a);
     return abs(a);
 }
 int main(){
@@ -111,6 +118,9 @@ int main(){
         for(int i=0;i<r;i++)
          for(int j=0;j<c;j++)
           cin>>arr[i][j];
-        cout<<recursive_dp(r,c,arr,r-1,c-1)<<endl;       
+        int dp[500][500];
+        memset(dp,-1,sizeof(dp));
+        int a=recursive_dp(r,c,arr,0,0,dp);
+        cout<<a<<endl;    
     }
 }
