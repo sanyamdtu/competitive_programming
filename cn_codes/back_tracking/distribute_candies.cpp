@@ -25,3 +25,64 @@ Sample Output:
 3
 9
 */
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool ispossible(ll arr[],int n,ll mid,ll c){
+    ll sum=0,temp[n],k=0;
+    for(int i=0;i<n;i++){
+        temp[i]=arr[i];
+    }
+    for(int i=n-1;i>=0;i--){
+        if(temp[i]>=mid){
+            temp[i]-=mid;
+            k++;
+            if(k==c)
+              return true;
+            if(temp[i]>=mid)
+             i++;
+        }
+        else
+         break;
+    }
+    return false;
+}
+ll func(ll arr[],int n,ll last,ll c){
+    //cout<<"ok";
+    ll beg=0;
+    ll mid=(beg+last)/2,maxi=INT_MIN;
+    while(beg<=last){
+        mid=(beg+last)/2;
+        if(ispossible(arr,n,mid,c)){
+            maxi=max(maxi,mid);
+            beg=mid+1;
+        }
+         
+        else
+         last=mid-1;
+    }
+    //  cout<<"ok";
+    return maxi;
+}
+int main(){
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int n;
+        cin>>n;
+        ll k, arr[n];
+        cin>>k;
+        for(int i=0;i<n;i++)
+         cin>>arr[i];
+        sort(arr,arr+n);
+        ll maxi=INT_MIN;
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,arr[i]);
+        }
+        // cout<<"ok";
+        cout<<func(arr,n,maxi,k)<<endl;
+        //cout<<ispossible(arr,n,66,31);
+    }
+    
+}

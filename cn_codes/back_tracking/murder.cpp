@@ -43,25 +43,36 @@ Hence the sum is 15 (0+1+1+9+4).
 using namespace std;
 typedef long long ll;
 ll mergesort(int arr[],int n,int s,int e){
-    if(s<=e){
+    if(s>=e){
         return 0;
     }
     int mid=(s+e)/2,i,j,c=0,temp[e-s+1];
-    int ans=mergesort(arr,n,s,mid);
+    ll ans=mergesort(arr,n,s,mid);
+    //cout<<ans<<"___";
     ans+=mergesort(arr,n,mid+1,e);
+    //cout<<ans<<"___";
+    ll sum=0;
     for(i=s,j=mid+1;i<=mid&&j<=e;){
         if(arr[i]<arr[j]){
-            temp[c]=arr[i];
+            sum+=arr[i];
             ans+=arr[i]*(e+1-j);
+            temp[c++]=arr[i++];
         }
         else
-        {
-            temp[c]=arr[j];
-            j++;
-            c++;
-        }
-        
+            temp[c++]=arr[j++];
     }
+    while(i<=mid)
+     temp[c++]=arr[i++];
+    while(j<=e){
+        temp[c++]=arr[j++];
+    }
+    for(int i=0,j=s;j<=e;i++,j++)
+     arr[j]=temp[i];
+    //cout<<ans<<"___";
+    for(int i=s;i<e-s+1;i++)
+     cout<<arr[i]<<" ";
+    cout<<endl;
+    return ans;
 }
 int main(){
     int t;
@@ -73,6 +84,6 @@ int main(){
         for(int i=0;i<n;i++)
          cin>>arr[i];
         ll ans=0;
-        mergesort(arr,n,0,n-1);
+        cout<<mergesort(arr,n,0,n-1)<<endl;
     }
 }
