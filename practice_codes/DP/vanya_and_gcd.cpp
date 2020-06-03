@@ -27,6 +27,7 @@ Sample Output
 */
 #include <bits/stdc++.h>
 using namespace std;
+#define mod 1000000007
 int gcd(int a, int b)
 {
     if (b == 0)
@@ -42,20 +43,17 @@ int main()
         cin >> arr[i];
     int dp[501][101];
     memset(dp, 0, sizeof(dp));
-    for (int i = 0; i <= 500; i++)
+    dp[0][arr[0]] = 1;
+    for (int i = 1; i < n; i++)
     {
+        dp[i][arr[i]]++;
         for (int j = i - 1; j >= 0; j--)
-        {
             for (int k = 1; k <= 100; k++)
-            {
                 if (arr[i] > arr[j])
-                {
-                    if (gcd(max(k, arr[i]), min(arr[i], k)))
-                        dp[i][1] += dp[j][k];
-                    else
-                        dp[i][gcd(max(k, arr[i]), min(arr[i], k))] += dp[j][k];
-                }
-            }
-        }
+                    dp[i][gcd(max(k, arr[i]), min(arr[i], k))] = (dp[i][gcd(max(k, arr[i]), min(arr[i], k))] + dp[j][k]) % mod;
     }
+    int count = 0;
+    for (int i = 0; i < n; i++)
+        count = (count + dp[i][1]) % mod;
+    cout << count;
 }
