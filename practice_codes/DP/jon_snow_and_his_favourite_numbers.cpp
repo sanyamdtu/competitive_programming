@@ -41,6 +41,7 @@ Sample Output
 */
 #include <bits/stdc++.h>
 using namespace std;
+int dp[1025][10000];
 int main()
 {
     int n, k, x;
@@ -48,4 +49,39 @@ int main()
     int arr[n];
     for (int i = 0; i < n; i++)
         cin >> arr[i];
+    memset(dp, 0, sizeof(dp));
+    for (int i = 0; i < n; i++)
+        dp[arr[i]][0]++;
+
+    for (int i = 1; i <= k; i++)
+    {
+        int flag = 1;
+        for (int j = 0; j < 1025; j++)
+        {
+            if (dp[j][i - 1] >= 1)
+            {
+                int rec = j;
+                if (flag == 0)
+                    rec ^= x;
+                dp[rec ^ x][i] += (dp[j][i - 1]) / 2 + dp[j][i - 1] % 2;
+                dp[rec][i] += dp[j][i - 1] / 2;
+                flag = (dp[j][i - 1] + flag) % 2;
+            }
+        }
+    }
+    int mini = 0, maxi = 0;
+    for (int i = 0;; i++)
+        if (dp[i][k] >= 1)
+        {
+            mini = i;
+            break;
+        }
+
+    for (int i = 1024;; i--)
+        if (dp[i][k] >= 1)
+        {
+            maxi = i;
+            break;
+        }
+    cout << maxi << " " << mini;
 }
