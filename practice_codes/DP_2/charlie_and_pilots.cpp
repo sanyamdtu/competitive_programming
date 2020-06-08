@@ -40,4 +40,5 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> c[i] >> a[i];
     for (int i = 0; i < n; i++)
+        ;
 }
