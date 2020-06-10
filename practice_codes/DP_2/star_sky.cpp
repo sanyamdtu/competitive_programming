@@ -42,14 +42,32 @@ Sample Output
 using namespace std;
 int main()
 {
-    int n, q, c;
-    cin >> n >> q >> c;
-    int x[n], y[n];
+    int n, q, cmax;
+    cin >> n >> q >> cmax;
+    int dp[101][101][cmax + 1];
+    memset(dp, 0, sizeof(dp));
     for (int i = 0; i < n; i++)
-        cin >> x[i] >> y[i];
+    {
+        int x, y, c;
+        cin >> x >> y >> c;
+        dp[x][y][c]++;
+    }
+
+    for (int k = 0; k <= cmax; k++)
+        for (int i = 0; i < 101; i++)
+            for (int j = 1; j < 101; j++)
+                dp[i][j][k] += dp[i][j - 1][k];
+    for (int k = 0; k <= cmax; k++)
+        for (int i = 0; i < 101; i++)
+            for (int j = 1; j < 101; j++)
+                dp[j][i][k] += dp[j - 1][i][k];
     while (q--)
     {
-        int x1, y1, x2, y2, t;
+        long long x1, y1, x2, y2, t;
         cin >> t >> x1 >> y1 >> x2 >> y2;
+        int brightness = 0;
+        for (int i = 0; i <= cmax; i++)
+            brightness += (dp[x2][y2][i] + dp[x1 - 1][y1 - 1][i] - dp[x1 - 1][y2][i] - dp[x2][y1 - 1][i]) * ((i + t) % (cmax + 1));
+        cout << brightness << endl;
     }
 }
