@@ -34,7 +34,7 @@ int func(int a, int b, int j = 1)
         return 1;
     int ans = 0;
     for (int i = j; a >= pow(i, b); i++)
-        ans += func(a - pow(i, b), b, i);
+        ans += func(a - pow(i, b), b, i + 1);
     return ans;
 }
 int main()
