@@ -31,10 +31,23 @@ int func(int a, int b, int j = 1)
     if (a < 0)
         return 0;
     if (a == 0)
+    {
+        cout << endl;
         return 1;
+    }
+
     int ans = 0;
     for (int i = j; a >= pow(i, b); i++)
-        ans += func(a - pow(i, b), b, i + 1);
+    {
+        // cout << i << " ";
+        int s = func(a - pow(i, b), b, i + 1);
+        if (s)
+        {
+            //cout << i << " ";
+            ans += s;
+        }
+    }
+
     return ans;
 }
 int main()

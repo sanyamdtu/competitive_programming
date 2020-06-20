@@ -33,6 +33,27 @@ struct activity
     ll s, e;
 
 } act[1000000];
+bool comp(activity a, activity b)
+{
+    return a.e < b.e;
+}
 int main()
 {
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> act[i].s >> act[i].e;
+    }
+    sort(act, act + n, comp);
+    int count = 0, time = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (time < act[i].s)
+        {
+            count++;
+            time = act[i].e;
+        }
+    }
+    cout << count;
 }
