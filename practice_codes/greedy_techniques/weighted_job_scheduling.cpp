@@ -45,7 +45,7 @@ int bsesarch(job s[], int ele, int last)
         else
             beg = mid + 1;
     }
-    if(mid)
+    if (mid)
 }
 int main()
 {
