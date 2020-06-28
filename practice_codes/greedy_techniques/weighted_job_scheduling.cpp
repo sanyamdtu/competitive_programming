@@ -34,18 +34,20 @@ bool comp(job a, job b) { return a.f < b.f; }
 bool comp2(job a, job b) { return a.s < b.s; }
 int bsesarch(job s[], int ele, int last)
 {
-    int beg = 0, mid;
+    int beg = 0, mid,ans=-1;
     while (beg <= last)
     {
         mid = (beg + last) / 2;
-        if (s[mid].f == ele)
-            return mid;
-        else if (s[mid].f < ele)
-            last = mid - 1;
+        if (s[mid].f<=ele){
+            if(s[mid+1].f<=ele)
+                beg=mid+1;
+            else 
+                return mid;
+        }
         else
-            beg = mid + 1;
+            last=mid-1;
     }
-    if (mid)
+    return -1;
 }
 int main()
 {
@@ -62,14 +64,10 @@ int main()
     {
         int maxi = jarr[i].p;
         int j = bsesarch(jarr, jarr[i].s, i - 1);
+        if(j!=-1)
         maxi = max(dp[j] + jarr[i].p, maxi);
         dp[i] = max(maxi, dp[i - 1]);
     }
-    int ans = INT_MIN;
-    for (int i = 0; i < n; i++)
-        cout << dp[i] << " ";
-    cout << endl;
-    for (int i = 0; i < n; i++)
-        ans = max(dp[i], ans);
-    cout << ans;
+    
+    cout << dp[n-1];
 }
