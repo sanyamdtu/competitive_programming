@@ -8,27 +8,27 @@ typedef  long long ll;
 int main()
 {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	ll s;
+	ll s,cost=0;
 	int n;
 	cin>>n>>s;
+	int m=(n+1)/2;
 	vector<ll> arr(n);
 	for (int i = 0; i < n; ++i)
 		cin>>arr[i];
 	sort(arr.begin(), arr.end());
-	auto j=find(arr.begin(), arr.end(),s);
-	int f=(j!=arr.end())?j-arr.begin():-1;
-	int m=(n+1)/2-1;
-	ll cost=0;
-	// if(f==-1){
-	// 	(s>arr[m])?f=n-1:f=
-	// }
-	if(m<f){
-		for (int i = m; i <=f; ++i)
-			cost+=s-arr[i];
+	if(m!=0) m--;
+	cost=abs(arr[m]-s);
+	// cout<<
+	for (int i = m+1; i < n; ++i)
+	{
+		if(arr[i]<s)
+			cost+=abs(s-arr[i]);
 	}
-	else (m>f)
-		for (int i = f; i <= m; ++i)
-			cost+=arr[i]-s;
+	for (int i = m-1; i >=0; --i)
+	{
+		if(arr[i]>s)
+			cost+=abs(s-arr[i]);
+	}
 	cout<<cost;
 	return 0;
 }
