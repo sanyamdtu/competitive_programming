@@ -12,24 +12,22 @@ int main()
 	cin >> t;
 	while (t--)
 	{
-		int n;
-		cin>>n;
-		ll arr[n];
+		int n,k,lp;
+		cin>>n>>k>>lp;
+		int d[n];
 		for (int i = 0; i < n; ++i)
 		{
-			cin>>arr[i];
+			cin>>d[i];
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
+		int karr[2*k];
+		for (int i = 0; i < 2*k; ++i)
+		{
+			if(i>k)
+				karr[i-1]=2*k-i;
+			else 
+			 karr[i-1]=i;
 		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
-		cout<<endl;
+		set<tuple<int,int,bool>> m;
 	}
 	return 0;
 }

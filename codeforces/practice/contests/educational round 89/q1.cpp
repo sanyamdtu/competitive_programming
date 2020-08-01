@@ -12,24 +12,27 @@ int main()
 	cin >> t;
 	while (t--)
 	{
-		int n;
-		cin>>n;
-		ll arr[n];
-		for (int i = 0; i < n; ++i)
-		{
-			cin>>arr[i];
+		
+		ll a,b;
+		cin>>a>>b;
+		ll ans=0;
+		if(b>a)
+			swap(a,b);
+		if(a==0||b==0)
+			ans=0;
+		else if(a>=2*b)
+			ans=b;
+		else{
+			if(a==b){
+				ans=(2*a)/3;
+			}
+			else{
+				ans+=(a-b);
+				ans+=(2*(2*b-a))/3;
+			}
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
-		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
-		cout<<endl;
+		cout<<ans<<endl;;
+
 	}
 	return 0;
 }

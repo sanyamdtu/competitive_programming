@@ -10,26 +10,22 @@ int main()
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	int t;
 	cin >> t;
+
 	while (t--)
 	{
-		int n;
-		cin>>n;
-		ll arr[n];
-		for (int i = 0; i < n; ++i)
-		{
-			cin>>arr[i];
+		ll l,r;
+		cin>>l>>r;	
+		ll x,y;
+		if(l*2<=r){
+			y=2*l;
+			x=l;
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
+		else{
+			x=-1;
+			y=-1;
 		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
-		cout<<endl;
+		cout<<x<<" "<<y<<endl;
 	}
+
 	return 0;
 }

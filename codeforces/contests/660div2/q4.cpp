@@ -14,22 +14,17 @@ int main()
 	{
 		int n;
 		cin>>n;
-		ll arr[n];
+		int arr[n],b[n];
 		for (int i = 0; i < n; ++i)
 		{
 			cin>>arr[i];
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
+		for (int i = 0; i < n; ++i)
+		{
+			cin>>b[i];
 		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
-		cout<<endl;
+		
+		
 	}
 	return 0;
 }

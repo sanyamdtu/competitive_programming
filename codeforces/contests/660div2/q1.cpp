@@ -14,21 +14,20 @@ int main()
 	{
 		int n;
 		cin>>n;
-		ll arr[n];
-		for (int i = 0; i < n; ++i)
-		{
-			cin>>arr[i];
+		if(n<31){
+			cout<<"NO";
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
+		else if(n==31){
+			cout<<"YES"<<endl<<10<<" "<<6<<" "<<14<<" "<<1;
 		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
+		else{
+			int x=15,y=n-31;
+			if(n-31==6||n-31==10||n-31==15){
+				y=n-30;
+				x=14;
+			}
+			cout<<"YES"<<endl<<10<<" "<<6<<" "<<x<<" "<<y;
+		}
 		cout<<endl;
 	}
 	return 0;

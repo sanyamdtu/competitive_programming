@@ -14,22 +14,17 @@ int main()
 	{
 		int n;
 		cin>>n;
-		ll arr[n];
-		for (int i = 0; i < n; ++i)
-		{
-			cin>>arr[i];
+		string s;
+		int i=0;
+		while(i<(n+3)/4){
+			s+='8';
+			i++;
 		}
-		int i=1;
-		bool flag=true;
-		while(arr[i-1]==1&&i<n){
-			flag=!flag;
-			i++;	
+		while(s.length()<n){
+			s+='9';
 		}
-		if(!flag)
-			cout<<"Second";
-		else
-			cout<<"First";
-		cout<<endl;
+		reverse(s.begin(), s.end());
+		cout<<s<<endl;
 	}
 	return 0;
 }
