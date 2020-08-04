@@ -42,7 +42,10 @@ int main()
 	int c=0,i=0;
 	while(c<n-1){
 		if(func(par,v[i].v1,v[i].v2)){
+            if(v[i].v1>v[i].v2)
+                swap(v[i].v1,v[i].v2);
 			ans.pb(v[i]);
+            par[v[i].v1]=v[i].v2;
 			c++;
 		}
 		i++;
