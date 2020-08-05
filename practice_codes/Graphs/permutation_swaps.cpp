@@ -54,6 +54,7 @@ public:
 			cout<<"NO";
 		else
 			cout<<"YES";
+        cout<<endl;
 	}
 
 	
