@@ -4,45 +4,50 @@ using namespace std;
 #define mod 1000000007
 #define INF 1e18
 typedef  long long ll;
-int func(int a,int b){
+ll func(ll a,ll b){
 	if(a==0||b%a==0)
 		return a;
 	return func(b%a,a);
 }
-
+ll funcy(ll i,ll n,ll gcd,ll arr[],ll dp[][10001]){
+	if(i==n){
+		if(gcd==1)
+			return 1;
+		return 0;
+	}
+	if(dp[i][gcd]>-1)
+		return dp[i][gcd];
+	ll toop=0;
+	if(gcd!=0)
+	 toop=func(gcd,arr[i]);
+	else
+		toop=arr[i];
+	return dp[i][gcd]=funcy(i+1,n,toop,arr,dp)+funcy(i+1,n,gcd,arr,dp);
+}
 
 int main()
 {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int t;
+	ll t;
 	cin >> t;
 	while (t--)
 	{
-		int n;
+		ll n;
 		cin>>n;
-		int arr[n];
-		for (int i = 0; i < n; ++i)
+		ll arr[n];
+		ll dp[n][10001];
+		for (ll i = 0; i < n; ++i)
+		{
+			for (ll j = 0; j < 10001; ++j)
+			{
+				dp[i][j]=-1;
+			}
+		}
+		for (ll i = 0; i < n; ++i)
 		{
 			cin>>arr[i];
 		}
-		int g=0;
-		int vis[n];
-		memset(vis,0,sizeof(vis));
-		for (int i = 0; i < n; ++i)
-		{
-			if(vis[i]==0)
-			for (int j = i+1; j <n ; ++j)
-			{
-				if(vis[j]==0)
-				if(func(i,j)==1){
-					vis[j]=1;
-					g+=2;
-					break;
-				}
-			}
-		}
-		cout<<g<<" ";
-		cout<<pow(2,n)-pow(2,n-g)-n<<endl;
+		cout<<funcy(0,n,0,arr,dp)<<endl;
 	}
 	return 0;
 }
