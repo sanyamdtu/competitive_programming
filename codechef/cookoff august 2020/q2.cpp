@@ -4,9 +4,7 @@ using namespace std;
 #define mod 1000000007
 #define INF 1e18
 typedef  long long ll;
-double servings(ll a, ll b){
 
-}
 int main()
 {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -16,7 +14,17 @@ int main()
 	{
 		int n;
 		cin>>n;
-		
+		for (int i = 0; i < n; ++i)
+		{
+			ll x,y;
+			cin>>x>>y;
+		}
+		ll ans=n;
+		while(n>=6){
+			n=(n/2);
+			ans+=n;
+		}
+		cout<<ans<<endl;
 	}
 	return 0;
 }
